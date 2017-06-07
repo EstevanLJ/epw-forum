@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Post;
+use Validator;
+
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class PostController extends Controller
 {
@@ -14,9 +17,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('area', 'author')->orderBy('id', 'desc')->take(6)->get();
-	
-		return view('posts', compact('posts'));
+        $posts = Post::all(['id', 'title', 'user_id', 'area_id']);
+
+        return response()->json($posts);
     }
 
     /**
@@ -43,21 +46,23 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        //
+        $post->load('author', 'area');
+
+        return response()->json($post);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
         //
     }
@@ -66,10 +71,10 @@ class PostController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
         //
     }
@@ -77,10 +82,10 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
         //
     }

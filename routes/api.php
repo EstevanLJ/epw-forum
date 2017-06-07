@@ -18,13 +18,13 @@ use Illuminate\Http\Request;
 // });
 
 
-Route::resource('area', 'AreaController', ['only' => [
+Route::resource('area', 'Api\AreaController', ['only' => [
     'index', 'store', 'show', 'update'
 ]]);
 
-Route::get('area/{area}/posts', 'AreaController@getPosts');
+Route::get('area/{area}/posts', 'Api\AreaController@getPosts');
 
 
-Route::resource('post', 'PostController', ['only' => [
+Route::resource('post', 'Api\PostController', ['only' => [
     'index', 'show'
 ]]);
