@@ -37,7 +37,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-6">
-                        <strong><a href="{{$post->getUrl()}}">{{$post->title}}</a></strong> <small>{{$post->area->name}}</small>
+                        <strong><a href="{{$post->getUrl()}}">{{$post->title}}</a></strong> <small>{{$post->area->name}}</small> <small>{{$post->getCommentsCount()}} comentários</small> 
                     </div>
                     <div class="col-lg-6">
                         <div class="pull-right">

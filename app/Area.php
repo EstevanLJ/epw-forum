@@ -2,9 +2,9 @@
 
 namespace App;
 
+use App\Post;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
-use App\Post;
 
 class Area extends Model
 {
@@ -20,6 +20,12 @@ class Area extends Model
     
     public function getPostsCount() {
         return DB::table('post')->where('area_id', $this->id)->count();
+    }
+
+    public function getCommentsCount() {
+        return DB::table('comment')
+                    ->join('post', 'comment.post_id', '=', 'post.id')
+                    ->where('post.area_id', $this->id)->count();
     }
 
 	public function lastPost() {

@@ -22,10 +22,33 @@ function parseDate($date) {
     return 'em '.$date;
 }
 
+
+/**
+ * Trims the string to a number of characters and appends "..." to it
+ *
+ * @param string $string The string to short
+ * @param integer $charNumbers Max char number
+ * @return String containing a URL
+ */
+function limitStringTo($string, $charNumbers = 100) {
+    if(strlen($string) > ($charNumbers - 3)) {
+        return substr($string, 0, $charNumbers - 3) . '...';
+    } else {
+        return $string;
+    }
+}
+
+
+/**
+ * Get a Adorable Avatar URL
+ *
+ * @param string $email The email address
+ * @param string $s Size in pixels
+ * @return String containing a URL
+ * @source http://adorable.io/
+ */
 function get_adorable($email, $pixels = 200) {
-
 	return 'https://api.adorable.io/avatars/'.$pixels.'/'.$email.'.png';
-
 }
 
 

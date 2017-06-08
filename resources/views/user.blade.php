@@ -53,6 +53,25 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-sm-12">
+
+            @if(sizeof($user->comments) > 0)
+                <h3>Últimos comentários:</h3>
+                <div class="list-group">
+                    @foreach($user->comments as $comment)
+                        <a href="#" class="list-group-item">{{limitStringTo($comment->comment, 70)}}</a>
+                    @endforeach
+                </div>
+            @else
+
+                <h3>Nenhum comentário!</h3>
+
+            @endif
+
+        </div>
+    </div>
+
 
 
 </div>

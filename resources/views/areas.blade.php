@@ -38,7 +38,7 @@
                         <div class="col-lg-7">                            
                             <h3>
                                 <a href="{{route('area', $area->id)}}">{{$area->name}}</a> 
-                                <small>{{$area->getPostsCount()}} postagens, alguns comentários</small>
+                                <small>{{$area->getPostsCount()}} postagens, {{$area->getCommentsCount()}} comentários</small>
                             </h3>                            
                         </div>
                         <div class="col-lg-5">

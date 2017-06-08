@@ -33,6 +33,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Post', 'user_id', 'id');
     }
 
+    public function comments() {
+        return $this->hasMany('App\Comment', 'user_id', 'id');
+    }
+
     public function getFullName() {
         return ucfirst(strtolower($this->first_name)).' '.ucfirst(strtolower($this->last_name));
     }
