@@ -46,9 +46,13 @@ class AreaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Area $area)
     {
-        //
+        $area->load('posts');
+
+        $posts = $area->posts;
+	
+		return view('posts', compact('area', 'posts'));
     }
 
     /**

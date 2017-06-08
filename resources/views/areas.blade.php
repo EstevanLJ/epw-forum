@@ -37,13 +37,13 @@
                     <div class="row">
                         <div class="col-lg-7">                            
                             <h3>
-                                <a href="#">{{$area->name}}</a> 
+                                <a href="{{route('area', $area->id)}}">{{$area->name}}</a> 
                                 <small>{{$area->getPostsCount()}} postagens, alguns comentários</small>
                             </h3>                            
                         </div>
                         <div class="col-lg-5">
                             <div class="pull-right" style="padding-top: 20px">
-                                ultima postagens por <a href="#">{{$area->lastPost()->author->user_name}}</a> {{parseDate($area->lastPost()->created_at)}}
+                                ultima postagens por <a href="{{route('user', $area->lastPost()->author->id)}}">{{$area->lastPost()->author->user_name}}</a> {{parseDate($area->lastPost()->created_at)}}
                             </div>
                         </div>
                     </div>

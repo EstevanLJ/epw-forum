@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="text-center">
-                <h1>Últimas postagens</h1>
+                <h1>{{isset($area) ? $area->name . ' - ' : ''}}Últimas postagens</h1>
                 <hr>
             </div>
         </div>
@@ -37,11 +37,11 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-6">
-                        <strong>{{$post->title}}</strong> <small>{{$post->area->name}}</small>
+                        <strong><a href="{{$post->getUrl()}}">{{$post->title}}</a></strong> <small>{{$post->area->name}}</small>
                     </div>
                     <div class="col-lg-6">
                         <div class="pull-right">
-                            por <a href="#">{{$post->author->user_name}}</a> {{parseDate($post->created_at)}}
+                            por <a href="{{$post->author->getUrl()}}">{{$post->author->user_name}}</a> {{parseDate($post->created_at)}}
                             <span class="text-primary">4 <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></span>
                             <span class="text-success">7 <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></span>
                             <span class="text-danger">19 <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></span>

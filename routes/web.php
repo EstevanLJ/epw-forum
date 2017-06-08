@@ -20,5 +20,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::get('/areas', 'AreaController@index');
-Route::get('/posts', 'PostController@index');
+Route::get('/areas', 'AreaController@index')->name('areas');
+Route::get('/area/{area}', 'AreaController@show')->name('area');
+
+Route::get('/posts', 'PostController@index')->name('posts');
+Route::get('/post/{post}', 'PostController@show')->name('post');
+
+Route::get('/users', 'UserController@index')->name('users');
+Route::get('/user/{user}', 'UserController@show')->name('user');

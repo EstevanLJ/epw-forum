@@ -15,9 +15,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="areas.html">Areas <span class="sr-only">(current)</span></a></li>
-                <li><a href="posts.html">Posts</a></li>
-                <li><a href="#">Usuários</a></li>
+                <li class="{{ Route::currentRouteName() == 'areas' ? 'active' : '' }}"><a href="/areas">Areas</a></li>
+                <li class="{{ Route::currentRouteName() == 'posts' ? 'active' : '' }}"><a href="/posts">Posts</a></li>
+                <li class="{{ Route::currentRouteName() == 'users' ? 'active' : '' }}"><a href="#">Usuários</a></li>
             </ul>
 
             <form class="navbar-form navbar-left" id="navBarSearchForm">

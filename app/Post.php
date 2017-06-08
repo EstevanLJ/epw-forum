@@ -19,4 +19,8 @@ class Post extends Model
     public function author() {
         return $this->hasOne('App\User', 'id', 'user_id');
     }
+
+    public function getUrl() {
+        return route('post', $this->id);
+    }
 }

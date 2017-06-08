@@ -28,4 +28,24 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function posts() {
+        return $this->hasMany('App\Post', 'user_id', 'id');
+    }
+
+    public function getFullName() {
+        return ucfirst(strtolower($this->first_name)).' '.ucfirst(strtolower($this->last_name));
+    }
+
+    public function getAvatarUrl() {
+        if(AVATAR_PROVIDER == 'adorable') {
+            return get_adorable($this->email);
+        } 
+        
+        return get_gravatar($this->email);
+    }
+
+    public function getUrl() {
+        return route('user', $this->id);
+    }
 }

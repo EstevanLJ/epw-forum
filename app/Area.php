@@ -27,5 +27,9 @@ class Area extends Model
 		$post->load('author');
 		return $post;
 	}
+
+    public function getUrl() {
+        return route('area', $this->id);
+    }
     
 }
