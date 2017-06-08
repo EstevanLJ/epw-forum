@@ -48,7 +48,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $post->load('author', 'area');
+        $post->load('author', 'area', 'comments');
+
+        //dd($post->comments);
 
         return view('post', compact('post'));
     }

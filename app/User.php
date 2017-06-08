@@ -45,6 +45,14 @@ class User extends Authenticatable
         return get_gravatar($this->email);
     }
 
+    public function getSmallAvatarUrl() {
+        if(AVATAR_PROVIDER == 'adorable') {
+            return get_adorable($this->email, 100);
+        } 
+        
+        return get_gravatar($this->email, 100, 'px');
+    }
+
     public function getUrl() {
         return route('user', $this->id);
     }

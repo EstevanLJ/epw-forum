@@ -12,6 +12,14 @@ class Post extends Model
         'title', 'text', 'user_id', 'area_id'
     ];
 
+    public function comments() {
+        return $this->hasMany('App\Comment', 'post_id', 'id');
+    }
+
+    public function getCommentsCount() {
+        return DB::table('comment')->where('post_id', $this->id)->count();
+    }
+
     public function area() {
         return $this->hasOne('App\Area', 'id', 'area_id');
     }
