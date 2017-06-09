@@ -14,7 +14,7 @@ class AreaTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();   
         
-        for($i = 0; $i < 10; $i++) {
+        for($i = 0; $i < SEEDERS_AREAS; $i++) {
             Area::create([
                 'name' => $faker->realText(20),
                 'description' => $faker->realText(50)

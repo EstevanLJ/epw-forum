@@ -14,11 +14,11 @@ class CommentTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();        
 
-        for($i = 0; $i < 200; $i++) {
+        for($i = 0; $i < SEEDERS_COMMENTS; $i++) {
             Comment::create([
                 'comment' => $faker->paragraph(2), 
-                'user_id' => rand(2,20), 
-                'post_id' => rand(1,50)
+                'user_id' => rand(2,SEEDERS_USERS), 
+                'post_id' => rand(1,SEEDERS_POSTS)
             ]);
         }
     }

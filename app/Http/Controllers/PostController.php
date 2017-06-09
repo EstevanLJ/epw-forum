@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use JavaScript;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -50,7 +51,9 @@ class PostController extends Controller
     {
         $post->load('author', 'area', 'comments');
 
-        //dd($post->comments);
+        JavaScript::put([
+            'post_id' => $post->id
+        ]);
 
         return view('post', compact('post'));
     }

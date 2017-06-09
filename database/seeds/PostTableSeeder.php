@@ -14,12 +14,12 @@ class PostTableSeeder extends Seeder
     {       
         $faker = Faker\Factory::create();        
 
-        for($i = 0; $i < 50; $i++) {
+        for($i = 0; $i < SEEDERS_POSTS; $i++) {
             Post::create([
                 'title' => $faker->realText(50), 
                 'text' => $faker->paragraph(5), 
-                'user_id' => rand(2,20), 
-                'area_id' => rand(1,10)
+                'user_id' => rand(2,SEEDERS_USERS), 
+                'area_id' => rand(1,SEEDERS_AREAS)
             ]);
         }
     }

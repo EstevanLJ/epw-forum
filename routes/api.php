@@ -28,3 +28,7 @@ Route::get('area/{area}/posts', 'Api\AreaController@getPosts');
 Route::resource('post', 'Api\PostController', ['only' => [
     'index', 'show'
 ]]);
+
+Route::resource('comment', 'Api\CommentController', ['only' => [
+	'store'
+]]);

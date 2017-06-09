@@ -6,7 +6,17 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="text-center">
-                <h1>{{isset($area) ? $area->name . ' - ' : ''}}Últimas postagens</h1>
+                @if(isset($area))
+                    
+                    <h1>{{$area->name}} - Últimas postagens</h1>
+
+                @else
+
+                    <h1>Últimas postagens</h1>
+
+                @endif
+
+
                 <hr>
             </div>
         </div>
@@ -37,7 +47,16 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-6">
-                        <strong><a href="{{$post->getUrl()}}">{{$post->title}}</a></strong> <small>{{$post->area->name}}</small> <small>{{$post->getCommentsCount()}} comentários</small> 
+                        <strong><a href="{{$post->getUrl()}}">{{$post->title}}</a></strong> 
+                        
+                        @unless(isset($area))
+                    
+                            <small>{{$post->area->name}}</small> 
+
+                        @endif
+                      
+                        <small>{{$post->getCommentsCount()}} comentários</small> 
+
                     </div>
                     <div class="col-lg-6">
                         <div class="pull-right">

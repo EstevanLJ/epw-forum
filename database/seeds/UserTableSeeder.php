@@ -30,7 +30,7 @@ class UserTableSeeder extends Seeder
             'password' => bcrypt('teste123')
         ]);
 
-        for($i = 0; $i < 18; $i++){
+        for($i = 0; $i < (SEEDERS_USERS-2); $i++){
 
             $first = $faker->firstName();
             $last = $faker->lastName();
