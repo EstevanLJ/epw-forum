@@ -35,12 +35,21 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Estevan Junges <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{Auth::user()->getFullName()}}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Perfil</a></li>
                         <li><a href="#">Configurações</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Sair</a></li>
+                        <li>
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Sair
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>                        
+                        </li>
                     </ul>
                 </li>
             </ul>

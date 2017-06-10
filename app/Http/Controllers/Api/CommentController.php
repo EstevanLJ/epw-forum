@@ -2,16 +2,28 @@
 
 namespace App\Http\Controllers\Api;
 
-use Validator;
-use App\Comment;
 use App\Post;
 use App\User;
 
+use Validator;
+use App\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
 class CommentController extends Controller
 {
+     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     /**
     * Display a listing of the resource.
     *
@@ -59,11 +71,11 @@ class CommentController extends Controller
 
 		$comment = Comment::create([
 			'post_id' => $request->post_id,
-			'user_id' => 2,
+			'user_id' => Auth::id(),
 			'comment' => $comment_decoded
 		]);        
         
-        return response()->json(['comment' => $comment], 201);       
+        return response()->json(['message' => 'success'], 201);       
         
     }
     

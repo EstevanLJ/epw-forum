@@ -142,21 +142,32 @@
                         }
                     }).then((res) => {
 
-                        console.log(res);
+                        if(res.status = 201) {
+                            $('#novo-comentario-modal-title').html('Sucesso!');
+                            $('#novo-comentario-modal-message').html('Comentário salvo com sucesso! Redirecionando...');
+                            $('#novo-comentario-modal').modal('show');
 
-                        $('#novo-comentario-modal-title').html('Sucesso!');
-                        $('#novo-comentario-modal-message').html('Comentário salvo com sucesso!');
+                            setTimeout(function () {
+                                location.reload();
+                            }, 2000);
+                        } else {
+                            $('#novo-comentario-modal-title').html('Erro!');
+                            $('#novo-comentario-modal-message').html('Algo deu errado!');   
+                            $('#novo-comentario-modal').modal('show');
+                        }
+                        
                     }).catch((err) => {
                         $('#novo-comentario-modal-title').html('Erro!');
                         $('#novo-comentario-modal-message').html('Algo deu errado!');   
+                        $('#novo-comentario-modal').modal('show');
                     })
 
                 } else {
                     $('#novo-comentario-modal-title').html('Erro!');
                     $('#novo-comentario-modal-message').html('Por favor, digite alguma coisa!');
+                    $('#novo-comentario-modal').modal('show');
                 }
 
-                $('#novo-comentario-modal').modal('show');
             });
 
             document.getElementById('novo-comentario-cancel').addEventListener('click', function(e) {

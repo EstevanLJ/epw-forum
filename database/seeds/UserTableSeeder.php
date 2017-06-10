@@ -26,8 +26,8 @@ class UserTableSeeder extends Seeder
             'first_name' => 'Estevan',
             'last_name' => 'Junges',
             'user_name' => 'estevan.junges',
-            'email' => 'estevan.junges@ewpforum.com',
-            'password' => bcrypt('teste123')
+            'email' => 'elj@ewp.com',
+            'password' => bcrypt('elj123')
         ]);
 
         for($i = 0; $i < (SEEDERS_USERS-2); $i++){
@@ -41,7 +41,7 @@ class UserTableSeeder extends Seeder
                 'last_name' => $last,
                 'user_name' => strtolower($first.'.'.$last),
                 'email' => $user.'@ewpforum.com',
-                'password' => bcrypt(str_random(6))
+                'password' => bcrypt('123')
             ]);
         }
 

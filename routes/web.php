@@ -11,14 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
+Route::get('/', 'PostController@index');
 
 Route::get('/areas', 'AreaController@index')->name('areas');
 Route::get('/area/{area}', 'AreaController@show')->name('area');
@@ -28,3 +23,21 @@ Route::get('/post/{post}', 'PostController@show')->name('post');
 
 Route::get('/users', 'UserController@index')->name('users');
 Route::get('/user/{user}', 'UserController@show')->name('user');
+
+
+
+//API routes -> achar um jeito de passar para o arquivo API e funcionar a autenticacao
+Route::resource('api/area', 'Api\AreaController', ['only' => [
+    'index', 'store', 'show', 'update'
+]]);
+
+Route::get('api/area/{area}/posts', 'Api\AreaController@getPosts');
+
+
+Route::resource('api/post', 'Api\PostController', ['only' => [
+    'index', 'show'
+]]);
+
+Route::resource('api/comment', 'Api\CommentController', ['only' => [
+	'store'
+]]);
