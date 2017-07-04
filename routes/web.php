@@ -41,3 +41,7 @@ Route::resource('api/post', 'Api\PostController', ['only' => [
 Route::resource('api/comment', 'Api\CommentController', ['only' => [
 	'store'
 ]]);
+
+Route::get('/test/bulma', function() {
+	return view('posts_bulma');
+});

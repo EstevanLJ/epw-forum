@@ -28,7 +28,7 @@ class PostController extends Controller
     {
         $posts = Post::with('area', 'author')->orderBy('id', 'desc')->take(6)->get();
 	
-		return view('posts', compact('posts'));
+		return view('posts_bulma', compact('posts'));
     }
 
     /**
