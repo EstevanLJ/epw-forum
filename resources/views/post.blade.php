@@ -1,187 +1,122 @@
-@extends('layouts.epw') 
+@extends('layouts.epw_bulma') 
 
 @section('content')
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="text-center">
-                <h1>{{$post->title}}</h1>
-                <span>em <a href="{{route('area', $post->area->id)}}">{{$post->area->name}}</a></span>
-            </div>
-        </div>
+
+<div class="columns">
+    <div class="column has-text-centered">
+        <h1 class="title is-1">{{$post->title}}</h1>
+        <h5 class="subtitle is-5">em <a href="{{route('area', $post->area->id)}}">{{$post->area->name}}</a></h5>
     </div>
-
-    <hr>
-
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="text-center">
-                <img src="{{$post->author->getAvatarUrl()}}" alt="profile" class="img-responsive" style="margin: 0 auto;">
-                <hr>
-                <h4><a href="{{$post->author->getUrl()}}">{{$post->author->user_name}}</a></h4>
-            </div>
-        </div>
-        <div class="col-sm-9">
-            <div class="">
-                <p>{{$post->text}}</p>
-            </div>
-        </div>
-    </div>
-
-    {{--
-    <div class="row">
-        <div class="col-sm-12">
-            <h3>Comentários:</h3>
-        </div>
-    </div> --}}
-
-    <hr> 
-    
-    @foreach($post->comments as $comment)
-
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="text-center">
-                <img src="{{$comment->author->getSmallAvatarUrl()}}" alt="profile" class="img-responsive" style="margin: 0 auto;">
-                <hr>
-                <h4><a href="{{$comment->author->getUrl()}}">{{$comment->author->user_name}}</a></h4>
-            </div>
-        </div>
-        <div class="col-sm-9">
-            <div class="">
-                <p>{{$comment->comment}}</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-offset-3 col-sm-9">
-
-
-            <button class="btn btn-white text-success"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></button>            
-            {{-- <button class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></button>            --}}
-
-            <button class="btn btn-white text-danger"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></button>            
-            {{-- <button class="btn btn-danger"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></button>            --}}
-
-            <span class="label label-success">0</span>
-            <span class="label label-danger">0</span>
-
-        </div>
-    </div>
-
-    <hr> 
-    
-    @endforeach 
-
-    {{-- Novo comentário --}}
-    <div class="row">
-        <div class="col-sm-offset-3 col-sm-9">
-            <h3 class="text-center">Novo comentário:</h3>             
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-12">    
-            <form class="form-horizontal">
-                <div class="form-group">
-                    <label for="novo-comentario-text" class="col-sm-3 control-label">Comentário</label>
-                    <div class="col-sm-9">
-                        <textarea id="novo-comentario-text" class="form-control" rows="5" placeholder="..."></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-3 col-sm-9">
-                        <button id="novo-comentario-cancel" type="submit" class="btn btn-default pull-left">Cancelar</button>
-                        <button id="novo-comentario-submit" type="submit" class="btn btn-primary pull-right">Enviar</button>
-                    </div>
-                </div>
-            </form>
-        </div>    
-    </div>
-
-
-    <div id="novo-comentario-modal" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 id="novo-comentario-modal-title" class="modal-title"></h4>
-                </div>
-                <div class="modal-body">
-                    <p id="novo-comentario-modal-message"></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <hr>
-
-
-    @push('scripts')
-
-    <script>
-        $(document).ready(function () {
-            
-            document.getElementById('novo-comentario-submit').addEventListener('click', function(e) {
-                e.preventDefault();
-
-                let text = document.getElementById('novo-comentario-text').value;
-                
-                if(text != '') {
-                    axios({
-                        method: 'POST',
-                        url: '/api/comment',
-                        data: {
-                            post_id: post_id,
-                            comment: btoa(text)
-                        }
-                    }).then((res) => {
-
-                        if(res.status = 201) {
-                            $('#novo-comentario-modal-title').html('Sucesso!');
-                            $('#novo-comentario-modal-message').html('Comentário salvo com sucesso! Redirecionando...');
-                            $('#novo-comentario-modal').modal('show');
-
-                            setTimeout(function () {
-                                location.reload();
-                            }, 2000);
-                        } else {
-                            $('#novo-comentario-modal-title').html('Erro!');
-                            $('#novo-comentario-modal-message').html('Algo deu errado!');   
-                            $('#novo-comentario-modal').modal('show');
-                        }
-                        
-                    }).catch((err) => {
-                        $('#novo-comentario-modal-title').html('Erro!');
-                        $('#novo-comentario-modal-message').html('Algo deu errado!');   
-                        $('#novo-comentario-modal').modal('show');
-                    })
-
-                } else {
-                    $('#novo-comentario-modal-title').html('Erro!');
-                    $('#novo-comentario-modal-message').html('Por favor, digite alguma coisa!');
-                    $('#novo-comentario-modal').modal('show');
-                }
-
-            });
-
-            document.getElementById('novo-comentario-cancel').addEventListener('click', function(e) {
-                e.preventDefault();
-                document.getElementById('novo-comentario-text').value = '';
-            });
-
-
-        });
-    
-    </script>
-
-    @endpush
-
 </div>
+
+<hr>
+
+<div class="box">
+    <article class="media">
+        <div class="media-left">
+            <figure class="image is-256x256">
+                <img src="{{$post->author->getAvatarUrl()}}" alt="Image">
+            </figure>
+        </div>
+        <div class="media-content">
+            <div class="content">
+                <p>
+                    <strong><a href="{{$post->author->getUrl()}}">{{$post->author->getFullName()}}</a></strong> {{'@' . $post->author->user_name}} {{getDataDiff($post->created_at)}}
+                    <br> 
+                    {{$post->text}}
+                </p>
+            </div>
+            {{--  <nav class="level is-mobile">
+                <div class="level-left">
+                    <a class="level-item">
+                        <span class="icon is-small"><i class="fa fa-reply"></i></span>
+                    </a>
+                    <a class="level-item">
+                        <span class="icon is-small"><i class="fa fa-retweet"></i></span>
+                    </a>
+                    <a class="level-item">
+                        <span class="icon is-small"><i class="fa fa-heart"></i></span>
+                    </a>
+                </div>  --}}
+            </nav>
+        </div>
+    </article>
+</div>
+
+<hr>
+
+@foreach($post->comments as $comment)
+
+<div class="box">
+    <article class="media">
+        <div class="media-left">
+            <figure class="image is-128x128">
+                <img src="{{$comment->author->getSmallAvatarUrl()}}" alt="Image">
+            </figure>
+        </div>
+        <div class="media-content">
+            <div class="content">
+                <p>
+                    <strong><a href="{{$comment->author->getUrl()}}">{{$comment->author->getFullname()}}</a></strong> <small>{{'@' . $comment->author->user_name}}</small> <small>{{getDataDiff($comment->created_at)}}</small>
+                    <br> {{$comment->comment}}
+                </p>
+            </div>
+            {{--  <nav class="level is-mobile">
+                <div class="level-left">
+                    <a class="level-item">
+                        <span class="icon is-small"><i class="fa fa-reply"></i></span>
+                    </a>
+                    <a class="level-item">
+                        <span class="icon is-small"><i class="fa fa-retweet"></i></span>
+                    </a>
+                    <a class="level-item">
+                        <span class="icon is-small"><i class="fa fa-heart"></i></span>
+                    </a>
+                </div>
+            </nav>  --}}
+        </div>
+    </article>
+</div>
+
+@endforeach
+
+<hr>
+<br>
+
+<div class="columns">
+    <div class="column has-text-centered">
+        <h3 class="title is-3">Novo Comentário</h3>
+    </div>
+</div>
+
+
+<form action="/api/comment" method="POST">
+    {{csrf_field()}}
+    <input type="hidden" name="post_id" value="{{$post->id}}">
+    <div class="field">
+        <label class="label">Comentário</label>
+        <p class="control">
+            <textarea class="textarea" placeholder="Escreva aqui o seu comentário" name="comment"></textarea>
+        </p>
+    </div>
+    <div class="field">
+        <p class="control">
+            <label class="checkbox">
+            <input type="checkbox" required>
+                Concordo com as <a href="#">regras do forúm</a>
+            </label>
+        </p>
+    </div>
+    <div class="field is-grouped">
+        <p class="control">
+            <button class="button is-primary">Enviar</button>
+        </p>
+        <p class="control">
+            <button class="button is-link">Cancelar</button>
+        </p>
+    </div>
+</form>
+
 
 @endsection

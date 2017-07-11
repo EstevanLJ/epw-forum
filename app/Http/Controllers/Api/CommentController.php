@@ -67,15 +67,19 @@ class CommentController extends Controller
 		//Verifica se o post existe
         $post = Post::findOrFail($request->input('post_id'));
 
-		$comment_decoded = base64_decode($request->comment);
+		// $comment_decoded = base64_decode($request->comment);
+		$comment_decoded = $request->comment;
 
 		$comment = Comment::create([
 			'post_id' => $request->post_id,
 			'user_id' => Auth::id(),
 			'comment' => $comment_decoded
 		]);        
+
+		Log:info('Comentario no post ' . $request->post_id);
         
-        return response()->json(['message' => 'success'], 201);       
+        //return response()->json(['message' => 'success'], 201);       
+		return redirect(route('post', $request->post_id));
         
     }
     

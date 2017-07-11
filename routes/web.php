@@ -45,5 +45,6 @@ Route::resource('api/comment', 'Api\CommentController', ['only' => [
 ]]);
 
 Route::get('/test/bulma', function() {
-    return view('post_bulma');
+    $post = \App\Post::first();
+	return view('post_bulma', compact('post'));
 });
