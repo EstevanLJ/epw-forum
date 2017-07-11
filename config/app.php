@@ -27,6 +27,17 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+	/*
+    |--------------------------------------------------------------------------
+    | Application Theme
+    |--------------------------------------------------------------------------
+    |
+    | Bulmaswatch theme used on application. More info: https://jenil.github.io/bulmaswatch/
+    |
+    */
+
+    'theme' => 'journal',
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode
