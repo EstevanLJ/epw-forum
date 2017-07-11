@@ -4,9 +4,9 @@
             <a class="nav-item">
                 <strong>Electrical Power Forum</strong>
             </a>
-            <a class="nav-item is-tab is-hidden-mobile {{ Route::currentRouteName() == 'areas' ? 'is-active' : '' }}">Áreas</a>
-            <a class="nav-item is-tab is-hidden-mobile {{ Route::currentRouteName() == 'posts' ? 'is-active' : '' }}">Posts</a>
-            <a class="nav-item is-tab is-hidden-mobile {{ Route::currentRouteName() == 'users' ? 'is-active' : '' }}">Usuários</a>
+            <a href="{{ route('areas') }}" class="nav-item is-tab is-hidden-mobile {{ Route::currentRouteName() == 'areas' ? 'is-active' : '' }}">Áreas</a>
+            <a href="{{ route('posts') }}" class="nav-item is-tab is-hidden-mobile {{ Route::currentRouteName() == 'posts' ? 'is-active' : '' }}">Posts</a>
+            <a href="{{ route('users') }}" class="nav-item is-tab is-hidden-mobile {{ Route::currentRouteName() == 'users' ? 'is-active' : '' }}">Usuários</a>
         </div>
         <span class="nav-toggle">
         <span></span>

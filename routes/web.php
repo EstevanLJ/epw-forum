@@ -13,7 +13,9 @@
 
 Auth::routes();
 
-Route::get('/', 'PostController@index');
+Route::get('/', function () {
+    return redirect('/posts');
+});
 
 Route::get('/areas', 'AreaController@index')->name('areas');
 Route::get('/area/{area}', 'AreaController@show')->name('area');
@@ -28,20 +30,20 @@ Route::get('/user/{user}', 'UserController@show')->name('user');
 
 //API routes -> achar um jeito de passar para o arquivo API e funcionar a autenticacao
 Route::resource('api/area', 'Api\AreaController', ['only' => [
-    'index', 'store', 'show', 'update'
+'index', 'store', 'show', 'update'
 ]]);
 
 Route::get('api/area/{area}/posts', 'Api\AreaController@getPosts');
 
 
 Route::resource('api/post', 'Api\PostController', ['only' => [
-    'index', 'show'
+'index', 'show'
 ]]);
 
 Route::resource('api/comment', 'Api\CommentController', ['only' => [
-	'store'
+'store'
 ]]);
 
 Route::get('/test/bulma', function() {
-	return view('posts_bulma');
+    return view('post_bulma');
 });

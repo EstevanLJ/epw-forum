@@ -1,78 +1,52 @@
-@extends('layouts.epw') 
+@extends('layouts.epw_bulma') 
 
 @section('content')
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="text-center">
-                @if(isset($area))
-                    
-                    <h1>{{$area->name}} - Últimas postagens</h1>
+    @if(isset($area))
+        
+        <h1 class="title is-1 has-text-centered">{{$area->name}} - Últimas Postagens</h1>
 
-                @else
+    @else
 
-                    <h1>Últimas postagens</h1>
+        <h1 class="title is-1 has-text-centered">Últimas Postagens</h1>
 
-                @endif
+    @endif
 
-
-                <hr>
-            </div>
-        </div>
-    </div>
-
-    {{-- Padrão --}}
-    {{-- <div class="panel panel-default">
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-lg-6">
-                    <strong>O que é um gerador?</strong> <small>Geradores</small>
-                </div>
-                <div class="col-lg-6">
-                    <div class="pull-right">
-                        por <a href="#">estevan.junes</a> à 3 horas
-                        <span class="text-primary">12 <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></span>
-                        <span class="text-success">10 <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></span>
-                        <span class="text-danger">5 <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
+     <hr>
 
     @foreach($posts as $post)
 
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <strong><a href="{{$post->getUrl()}}">{{$post->title}}</a></strong> 
-                        
-                        @unless(isset($area))
+        <div class="box">
+
+            <nav class="level">
+                <div class="level-left">
+                    <div class="level-item">
+                        <p class="subtitle is-5">
+                            <strong><a href="{{$post->getUrl()}}">{{$post->title}}</a></strong> 
+                            
+                            @unless(isset($area))
                     
-                            <small>{{$post->area->name}}</small> 
+                                {{$post->area->name}}
 
-                        @endif
-                      
-                        <small>{{$post->getCommentsCount()}} comentários</small> 
+                            @endif
+                        
+                                {{$post->getCommentsCount()}} comentários
 
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="pull-right">
-                            por <a href="{{$post->author->getUrl()}}">{{$post->author->user_name}}</a> {{parseDate($post->created_at)}}
-                            <span class="text-primary">4 <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></span>
-                            <span class="text-success">7 <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></span>
-                            <span class="text-danger">19 <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></span>
-                        </div>
+                        </p>
                     </div>
                 </div>
-            </div>
+                <div class="level-right">
+                    <p class="level-item">
+                        por&nbsp;<a href="{{$post->author->getUrl()}}">{{$post->author->user_name}}</a>&nbsp;{{parseDate($post->created_at)}} 
+                        &nbsp;7 <span class="icon"><i class="fa fa-thumbs-o-up"></i></span>                            
+                        &nbsp;3<span class="icon"><i class="fa fa-thumbs-o-down"></i></span>
+                    </p>
+                </div>
+            </nav>
+
         </div>
 
     @endforeach
-
-    <hr>
 
 </div>
 
