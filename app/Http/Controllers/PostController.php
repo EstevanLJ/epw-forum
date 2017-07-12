@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Area;
 use JavaScript;
 use Illuminate\Http\Request;
 
@@ -38,7 +39,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $areas = Area::all();
+
+		return view('forms.post', compact('areas'));
     }
 
     /**

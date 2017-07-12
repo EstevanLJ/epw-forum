@@ -39,7 +39,7 @@
                         {{--  Username  --}}
                         <div class="field">
                             <p class="control has-icons-left has-icons-right">
-                                <input class="input {{ $errors->has('user_name') ? 'is-danger' : '' }}" 
+                                <input class="input is-medium {{ $errors->has('user_name') ? 'is-danger' : '' }}" 
                                     type="text" 
                                     name="user_name" 
                                     value="{{ old('user_name') }}" 
@@ -64,7 +64,7 @@
                         {{--  Password  --}}
                         <div class="field">
                             <p class="control has-icons-left has-icons-right">
-                                <input class="input {{ $errors->has('password') ? 'is-danger' : '' }}" 
+                                <input class="input is-medium {{ $errors->has('password') ? 'is-danger' : '' }}" 
                                     type="password"
                                     name="password"  
                                     placeholder="Senha"
@@ -84,23 +84,26 @@
                             @endif
                         </div>
 
+
                         {{--  Remember me  --}}
-                        <div class="field">
-                            <p class="control">
+                        <div class="field is-grouped">
+                            
+                            <p class="control is-expanded">
                                 <label class="checkbox">
-                                <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <input type="checkbox" class="" name="remember" {{ old('remember') ? 'checked' : '' }}>
                                     Lembrar de mim
                                 </label>
-                            </p>
-                        </div>
+                            </p> 
 
-                        <div class="field">
-                            <p class="control ">
+                            <p class="control">
                                 <button class="button is-primary" type="submit">
                                     Login
-                                </button>
-                            </p>
-                        </div>   
+                                </button>                         
+                            </p> 
+
+                        </div> 
+
+
                         <hr style="margin-bottom: 5px">    
                     </form>   
                     
