@@ -9,7 +9,7 @@
 
     {{--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.min.css">  --}}
     {{--  <link rel="stylesheet" href="/css/bulmaswatch/bulmaswatch.min.css">  --}}
-    <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/{{ config('app.theme') }}/bulmaswatch.min.css">
+    <link rel="stylesheet" href="/css/bulmaswatch/{{ config('app.theme') }}/bulmaswatch.min.css">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -124,17 +124,6 @@
 
         </div>
     </div>
-
-    <!--jQuery-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.min.js"></script>
-
-    <script>
-        axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-    </script>
-
-    @stack('scripts')
     
 </body>
 

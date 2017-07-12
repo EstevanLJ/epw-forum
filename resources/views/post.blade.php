@@ -12,6 +12,19 @@
 
 <hr>
 
+@if(Auth::user()->can('update', $post))
+
+    <div class="block">
+        <a class="button is-primary">Editar Post</a>
+        <a class="button is-warning">Arquivar Post</a>
+    </div>
+
+
+
+    <hr>
+
+@endif
+
 <div class="box">
     <article class="media">
         <div class="media-left">
@@ -44,42 +57,47 @@
     </article>
 </div>
 
-<hr>
 
-@foreach($post->comments as $comment)
+@if(sizeof($post->comments) > 0)
 
-<div class="box">
-    <article class="media">
-        <div class="media-left">
-            <figure class="image is-128x128">
-                <img src="{{$comment->author->getSmallAvatarUrl()}}" alt="Image">
-            </figure>
-        </div>
-        <div class="media-content">
-            <div class="content">
-                <p>
-                    <strong><a href="{{$comment->author->getUrl()}}">{{$comment->author->getFullname()}}</a></strong> <small>{{'@' . $comment->author->user_name}}</small> <small>{{getDataDiff($comment->created_at)}}</small>
-                    <br> {{$comment->comment}}
-                </p>
+    <hr>
+
+    @foreach($post->comments as $comment)
+
+    <div class="box">
+        <article class="media">
+            <div class="media-left">
+                <figure class="image is-128x128">
+                    <img src="{{$comment->author->getSmallAvatarUrl()}}" alt="Image">
+                </figure>
             </div>
-            {{--  <nav class="level is-mobile">
-                <div class="level-left">
-                    <a class="level-item">
-                        <span class="icon is-small"><i class="fa fa-reply"></i></span>
-                    </a>
-                    <a class="level-item">
-                        <span class="icon is-small"><i class="fa fa-retweet"></i></span>
-                    </a>
-                    <a class="level-item">
-                        <span class="icon is-small"><i class="fa fa-heart"></i></span>
-                    </a>
+            <div class="media-content">
+                <div class="content">
+                    <p>
+                        <strong><a href="{{$comment->author->getUrl()}}">{{$comment->author->getFullname()}}</a></strong> <small>{{'@' . $comment->author->user_name}}</small> <small>{{getDataDiff($comment->created_at)}}</small>
+                        <br> {{$comment->comment}}
+                    </p>
                 </div>
-            </nav>  --}}
-        </div>
-    </article>
-</div>
+                {{--  <nav class="level is-mobile">
+                    <div class="level-left">
+                        <a class="level-item">
+                            <span class="icon is-small"><i class="fa fa-reply"></i></span>
+                        </a>
+                        <a class="level-item">
+                            <span class="icon is-small"><i class="fa fa-retweet"></i></span>
+                        </a>
+                        <a class="level-item">
+                            <span class="icon is-small"><i class="fa fa-heart"></i></span>
+                        </a>
+                    </div>
+                </nav>  --}}
+            </div>
+        </article>
+    </div>
 
-@endforeach
+    @endforeach
+
+@endif
 
 <hr>
 <br>
