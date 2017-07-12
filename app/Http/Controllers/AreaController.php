@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Area;
 use Illuminate\Http\Request;
+use Validator;
 
 class AreaController extends Controller
 {

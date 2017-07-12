@@ -16,16 +16,22 @@
                         <p class="subtitle is-5">
                             <strong><a href="{{$area->getUrl()}}">{{$area->name}}</a></strong> 
                             
-                            {{$area->getPostsCount()}} postagens, {{$area->getCommentsCount()}} comentários
+                            <small>{{$area->getPostsCount()}} postagens, {{$area->getCommentsCount()}} comentários</small>
 
                         </p>
                     </div>
                 </div>
-                <div class="level-right">
-                    <p class="level-item">
-                        ultima postagens por&nbsp;<a href="{{$area->lastPost()->author->getUrl()}}">{{$area->lastPost()->author->user_name}}</a>&nbsp;{{parseDate($area->lastPost()->created_at)}} 
-                    </p>
-                </div>
+
+                @if($area->getPostsCount() > 0)
+
+                    <div class="level-right">
+                        <p class="level-item">
+                            ultima postagens por&nbsp;<a href="{{$area->lastPost()->author->getUrl()}}">{{$area->lastPost()->author->user_name}}</a>&nbsp;{{getDataDiff($area->lastPost()->created_at)}} 
+                        </p>
+                    </div>
+
+                @endif
+                
             </nav>
 
         </div>

@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Area;
+
 use JavaScript;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Validator;
 
 class PostController extends Controller
 {
@@ -52,7 +55,41 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+		$messages = [
+			'title.required' => 'O título é obrigatório',
+			'text.required' => 'O texto é obrigatório',
+			'area_id.required' => 'A área é obrigatória',
+			'area_id.exists' => 'Por favor, selecione uma área válida',
+			'title.unique_in_area' => 'Já existe um post com o mesmo título, escolha outro',
+		];
+
+        $validator = Validator::make($request->all(), [
+			'area_id' => 'required|exists:area,id',
+			'title' => 'required|max:240|unique_in_area:'.$request->input('area_id'),
+			'text' => 'required',
+        ], $messages);
+        
+        if ($validator->fails()) {
+            
+			$errors = $validator->errors();
+			$areas = Area::all();
+
+			//return view('forms.post', compact('areas', 'errors'));
+
+			return redirect(route('post.create'))
+						->withErrors($validator)
+                        ->withInput();
+        }
+        
+        $post = Post::create([
+			'title' => $request->input('title'),
+			'text' => $request->input('text'),
+			'area_id' => $request->input('area_id'),
+			'user_id' => Auth::id()
+        ]);
+        
+        //return response()->json($area);
+		return redirect($post->getUrl());
     }
 
     /**
@@ -65,9 +102,9 @@ class PostController extends Controller
     {
         $post->load('author', 'area', 'comments');
 
-        JavaScript::put([
-            'post_id' => $post->id
-        ]);
+        // JavaScript::put([
+        //     'post_id' => $post->id
+        // ]);
 
         return view('post', compact('post'));
     }

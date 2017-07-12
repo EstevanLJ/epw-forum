@@ -28,6 +28,7 @@ function parseDate($date) {
 * @return string
 */
 function getDataDiff($data) {
+	Carbon\Carbon::setLocale(config('app.locale'));
     return Carbon\Carbon::parse($data)->diffForHumans();
 }
 

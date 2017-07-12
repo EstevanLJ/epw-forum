@@ -14,7 +14,7 @@
 Auth::routes();
 
 Route::get('/', function () {
-    return redirect('/posts');
+    return redirect('/post');
 });
 
 Route::get('/users', 'UserController@index')->name('users');
@@ -26,12 +26,17 @@ Route::resource('area', 'AreaController', ['only' => [
 ]]);
 
 Route::resource('post', 'PostController', ['only' => [
-	'index', 'create', 'show'
+	'index', 'create', 'store', 'show'
 ]]);
 
 Route::resource('comment', 'CommentController', ['only' => [
 	'store'
 ]]);
+
+
+Route::get('/regras-forum', function () {
+	abort(404);
+})->name('regras');
 
 // Route::get('/test/bulma', function() {
 //     //$post = \App\Post::first();

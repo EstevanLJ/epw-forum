@@ -104,7 +104,7 @@
         <p class="control">
             <label class="checkbox">
             <input type="checkbox" required>
-                Concordo com as <a href="#">regras do forúm</a>
+                Concordo com as <a href="{{ route('regras') }}">regras do forúm</a>
             </label>
         </p>
     </div>
@@ -112,9 +112,9 @@
         <p class="control">
             <button class="button is-primary">Enviar</button>
         </p>
-        <p class="control">
+        {{--  <p class="control">
             <button class="button is-link">Cancelar</button>
-        </p>
+        </p>  --}}
     </div>
 </form>
 

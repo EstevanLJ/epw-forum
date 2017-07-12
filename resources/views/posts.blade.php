@@ -26,18 +26,19 @@
                             
                             @unless(isset($area))
                     
-                                {{$post->area->name}}
+                                
+                                <small>{{$post->area->name}}</small>
 
                             @endif
                         
-                                {{$post->getCommentsCount()}} comentários
+                                <small>{{$post->getCommentsCount()}} comentários</small>
 
                         </p>
                     </div>
                 </div>
                 <div class="level-right">
                     <p class="level-item">
-                        por&nbsp;<a href="{{$post->author->getUrl()}}">{{$post->author->user_name}}</a>&nbsp;{{parseDate($post->created_at)}} 
+                        por&nbsp;<a href="{{$post->author->getUrl()}}">{{$post->author->user_name}}</a>&nbsp;{{getDataDiff($post->created_at)}} 
                         &nbsp;7 <span class="icon"><i class="fa fa-thumbs-o-up"></i></span>                            
                         &nbsp;3<span class="icon"><i class="fa fa-thumbs-o-down"></i></span>
                     </p>
