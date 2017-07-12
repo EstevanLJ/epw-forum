@@ -21,6 +21,10 @@ class Post extends Model
         return DB::table('comment')->where('post_id', $this->id)->count();
     }
 
+	public function getLastComment() {
+        return DB::table('comment')->where('post_id', $this->id)->orderBy('id', 'desc')->first();
+    }
+
     public function area() {
         return $this->hasOne('App\Area', 'id', 'area_id');
     }

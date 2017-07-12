@@ -16,7 +16,11 @@
                         <p class="subtitle is-5">
                             <strong><a href="{{$area->getUrl()}}">{{$area->name}}</a></strong> 
                             
-                            <small>{{$area->getPostsCount()}} postagens, {{$area->getCommentsCount()}} comentários</small>
+                            <small> {{$area->getPostsCount()}} postage{{ $area->getPostsCount() > 1 ? 'ns' : 'm' }}, 
+                            
+                            {{$area->getCommentsCount()}} comentário{{ $area->getCommentsCount() > 1 ? 's' : '' }}
+                            
+                            </small>
 
                         </p>
                     </div>

@@ -30,7 +30,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('area', 'author')->orderBy('id', 'desc')->take(6)->get();
+        $posts = Post::with('area', 'author')->orderBy('created_at', 'desc')->take(6)->get();
 	
 		return view('posts', compact('posts'));
     }

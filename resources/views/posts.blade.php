@@ -31,7 +31,7 @@
 
                             @endif
                         
-                                <small>{{$post->getCommentsCount()}} comentários</small>
+                                <small>{{$post->getCommentsCount()}} comentário{{$post->getCommentsCount() > 1 ? 's' : ''}}</small>
 
                         </p>
                     </div>
