@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
 use App\Post;
 use App\User;
+use App\Comment;
 
 use Validator;
-use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
 
 class CommentController extends Controller
 {
@@ -79,7 +78,7 @@ class CommentController extends Controller
 		Log:info('Comentario no post ' . $request->post_id);
         
         //return response()->json(['message' => 'success'], 201);       
-		return redirect(route('post', $request->post_id));
+		return redirect(route('post.show', $request->post_id));
         
     }
     

@@ -6,7 +6,7 @@
 <div class="columns">
     <div class="column has-text-centered">
         <h1 class="title is-1">{{$post->title}}</h1>
-        <h5 class="subtitle is-5">em <a href="{{route('area', $post->area->id)}}">{{$post->area->name}}</a></h5>
+        <h5 class="subtitle is-5">em <a href="{{ $post->area->getUrl() }}">{{$post->area->name}}</a></h5>
     </div>
 </div>
 
@@ -91,7 +91,7 @@
 </div>
 
 
-<form action="/api/comment" method="POST">
+<form action="/comment" method="POST">
     {{csrf_field()}}
     <input type="hidden" name="post_id" value="{{$post->id}}">
     <div class="field">

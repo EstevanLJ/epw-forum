@@ -35,7 +35,7 @@ class Area extends Model
 	}
 
     public function getUrl() {
-        return route('area', $this->id);
+        return route('area.show', $this->id);
     }
     
 }

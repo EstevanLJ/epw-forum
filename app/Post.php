@@ -30,6 +30,6 @@ class Post extends Model
     }
 
     public function getUrl() {
-        return route('post', $this->id);
+        return route('post.show', $this->id);
     }
 }

@@ -14,7 +14,7 @@
                 <div class="level-left">
                     <div class="level-item">
                         <p class="subtitle is-5">
-                            <strong><a href="{{route('area', $area->id)}}">{{$area->name}}</a></strong> 
+                            <strong><a href="{{$area->getUrl()}}">{{$area->name}}</a></strong> 
                             
                             {{$area->getPostsCount()}} postagens, {{$area->getCommentsCount()}} comentários
 

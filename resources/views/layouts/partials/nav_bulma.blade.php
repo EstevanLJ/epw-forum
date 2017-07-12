@@ -4,8 +4,8 @@
             <a class="nav-item">
                 <strong>Electrical Power Forum</strong>
             </a>
-            <a href="{{ route('areas') }}" class="nav-item is-tab is-hidden-mobile {{ Route::currentRouteName() == 'areas' ? 'is-active' : '' }}">Áreas</a>
-            <a href="{{ route('posts') }}" class="nav-item is-tab is-hidden-mobile {{ Route::currentRouteName() == 'posts' ? 'is-active' : '' }}">Posts</a>
+            <a href="{{ route('area.index') }}" class="nav-item is-tab is-hidden-mobile {{ Route::currentRouteName() == 'area.index' ? 'is-active' : '' }}">Áreas</a>
+            <a href="{{ route('post.index') }}" class="nav-item is-tab is-hidden-mobile {{ Route::currentRouteName() == 'post.index' ? 'is-active' : '' }}">Posts</a>
             {{--  <a href="{{ route('users') }}" class="nav-item is-tab is-hidden-mobile {{ Route::currentRouteName() == 'users' ? 'is-active' : '' }}">Usuários</a>  --}}
         </div>
         <span class="nav-toggle">
