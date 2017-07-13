@@ -8,6 +8,7 @@ use App\Area;
 use JavaScript;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Validator;
 
 class PostController extends Controller
@@ -117,7 +118,13 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+		$post = Post::findOrFail($id);
+
+        if(Auth::user()->cant('update', $post)) {
+			abort(401);
+		}
+
+		return view('forms.post-update', compact('post'));
     }
 
     /**
@@ -129,7 +136,35 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        if(Auth::user()->cant('update', $post)) {
+			abort(401);
+		}
+
+		$messages = [
+			'text.required' => 'O texto é obrigatório',
+		];
+
+        $validator = Validator::make($request->all(), [
+			'text' => 'required',
+        ], $messages);
+        
+        if ($validator->fails()) {
+            
+			$errors = $validator->errors();
+
+			return redirect(route('post.edit', $post->id))
+						->withErrors($validator)
+                        ->withInput();
+        }
+
+		$post->text = $request->input('text');
+		$post->save();
+
+		return redirect(route('post.show', $post->id));
+
+		
     }
 
     /**

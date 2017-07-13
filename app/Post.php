@@ -17,20 +17,24 @@ class Post extends Model
         return $this->hasMany('App\Comment', 'post_id', 'id');
     }
 
-    public function getCommentsCount() {
-        return DB::table('comment')->where('post_id', $this->id)->count();
-    }
-
-	public function getLastComment() {
-        return DB::table('comment')->where('post_id', $this->id)->orderBy('id', 'desc')->first();
-    }
-
     public function area() {
         return $this->hasOne('App\Area', 'id', 'area_id');
     }
 
     public function author() {
         return $this->hasOne('App\User', 'id', 'user_id');
+    }
+
+	public function wasEdited() {
+		return DB::table('post_edit')->where('post_id', $this->id)->count() > 0;
+	}
+
+    public function getCommentsCount() {
+        return DB::table('comment')->where('post_id', $this->id)->count();
+    }
+
+	public function getLastComment() {
+        return DB::table('comment')->where('post_id', $this->id)->orderBy('id', 'desc')->first();
     }
 
     public function getUrl() {

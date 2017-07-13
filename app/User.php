@@ -37,6 +37,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Comment', 'user_id', 'id');
     }
 
+	public function isAdmin() {
+		return $this->id == 1;
+	}
+
     public function getFullName() {
         return ucfirst(strtolower($this->first_name)).' '.ucfirst(strtolower($this->last_name));
     }

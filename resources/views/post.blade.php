@@ -14,9 +14,18 @@
 
 @if(Auth::user()->can('update', $post))
 
-    <div class="block">
-        <a class="button is-primary">Editar Post</a>
-        <a class="button is-warning">Arquivar Post</a>
+    
+
+    <div class="columns">
+        <div class="column is-three-quarters">
+            Post criado em {{formatDate($post->created_at)}}
+        </div>
+        <div class="column">
+            <div class="block is-pulled-right">
+                <a class="button is-primary" href="{{ route('post.edit', $post->id) }}">Editar Post</a>
+                <a class="button is-warning">Arquivar Post</a>
+            </div>
+        </div>
     </div>
 
 

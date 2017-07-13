@@ -26,19 +26,18 @@ Route::resource('area', 'AreaController', ['only' => [
 ]]);
 
 Route::resource('post', 'PostController', ['only' => [
-	'index', 'create', 'store', 'show'
+	'index', 'create', 'store', 'show', 'edit', 'update'
 ]]);
 
 Route::resource('comment', 'CommentController', ['only' => [
 	'store'
 ]]);
 
-
 Route::get('/regras-forum', function () {
 	abort(404);
 })->name('regras');
 
-// Route::get('/test/bulma', function() {
-//     //$post = \App\Post::first();
-//     return view('auth.login_bulma');
+// Route::get('/test/post/edit/{id}', function($id) {
+//     $post = \App\Post::findOrFail($id);
+//     return response()->json($post->wasEdited());
 // });

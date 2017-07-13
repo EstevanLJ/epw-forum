@@ -5,21 +5,10 @@
 *
 * @return string
 */
-function parseDate($date) {
-    
-    /*
-    Retornar coisas como:
-    agora mesmo,
-    há 15 minutos
-    há 4 horas,
-    ontem,
-    há 3 dias,
-    semana passada,
-    há 3 mêses,
-    ano passado
-    */
-    
-    return 'em '.$date;
+function formatDate($date) {
+    $date = new DateTime($date);
+
+    return $date->format('d/m/Y \à\s H:i:s');
 }
 
 /**

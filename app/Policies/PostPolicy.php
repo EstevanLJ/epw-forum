@@ -12,7 +12,9 @@ class PostPolicy
 
     public function before($user, $ability)
     {
-        return null;
+        if($user->isAdmin()) {
+			return true;
+		}
     }
 
     /**

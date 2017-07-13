@@ -30,7 +30,7 @@
 
                     <div class="level-right">
                         <p class="level-item">
-                            ultima postagens por&nbsp;<a href="{{$area->lastPost()->author->getUrl()}}">{{$area->lastPost()->author->user_name}}</a>&nbsp;{{getDataDiff($area->lastPost()->created_at)}} 
+                            ultima postagen por&nbsp;<a href="{{$area->lastPost()->author->getUrl()}}">{{$area->lastPost()->author->user_name}}</a>&nbsp;{{getDataDiff($area->lastPost()->created_at)}} 
                         </p>
                     </div>
 
