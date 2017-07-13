@@ -17,4 +17,9 @@ class PostEdit extends Model
 	public function post() {
         return $this->hasOne('App\Post', 'id', 'post_id');
     }
+
+	public function author() {
+        return $this->hasOne('App\User', 'id', 'user_id');
+    }
+	
 }

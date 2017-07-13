@@ -17,6 +17,10 @@ class Post extends Model
         return $this->hasMany('App\Comment', 'post_id', 'id');
     }
 
+	public function edits() {
+        return $this->hasMany('App\PostEdit', 'post_id', 'id');
+    }
+
     public function area() {
         return $this->hasOne('App\Area', 'id', 'area_id');
     }
@@ -27,6 +31,15 @@ class Post extends Model
 
 	public function wasEdited() {
 		return DB::table('post_edit')->where('post_id', $this->id)->count() > 0;
+	}
+
+	public function getLastText() {
+		if($this->wasEdited()) {
+			return $this->edits->last()->text;
+		} else {
+			return $this->text;
+		}
+
 	}
 
     public function getCommentsCount() {

@@ -24,7 +24,7 @@ class CreatePostEditTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('user');
 
-            $table->timestamp('data')->useCurrent();
+            $table->timestamp('date')->useCurrent();
         });
     }
 

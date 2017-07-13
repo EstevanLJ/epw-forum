@@ -44,9 +44,16 @@
         <div class="media-content">
             <div class="content">
                 <p>
-                    <strong><a href="{{$post->author->getUrl()}}">{{$post->author->getFullName()}}</a></strong> {{'@' . $post->author->user_name}} {{getDataDiff($post->created_at)}}
+                    <strong><a href="{{$post->author->getUrl()}}">{{$post->author->getFullName()}}</a></strong>
+                    {{'@' . $post->author->user_name}} 
+
+                    @if($post->wasEdited())
+                        <a href="{{ route('post.history', $post->id)}}">editado</a>
+                    @endif
+                    
+                    {{getDataDiff($post->created_at)}}
                     <br> 
-                    {{$post->text}}
+                    {{$post->getLastText()}}
                 </p>
             </div>
             {{--  <nav class="level is-mobile">

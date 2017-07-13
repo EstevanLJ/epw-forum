@@ -25,6 +25,9 @@ Route::resource('area', 'AreaController', ['only' => [
 	'index', 'show'
 ]]);
 
+
+Route::get('/post/{id}/history', 'PostController@history')->name('post.history');
+
 Route::resource('post', 'PostController', ['only' => [
 	'index', 'create', 'store', 'show', 'edit', 'update'
 ]]);
@@ -37,7 +40,7 @@ Route::get('/regras-forum', function () {
 	abort(404);
 })->name('regras');
 
-// Route::get('/test/post/edit/{id}', function($id) {
-//     $post = \App\Post::findOrFail($id);
-//     return response()->json($post->wasEdited());
-// });
+Route::get('/test/post/edit/{id}', function($id) {
+    $post = \App\Post::findOrFail($id);
+    return response()->json($post->getLastText());
+});

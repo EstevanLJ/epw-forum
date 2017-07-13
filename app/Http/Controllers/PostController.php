@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Area;
+use App\PostEdit;
 
 use JavaScript;
 use Illuminate\Http\Request;
@@ -159,13 +160,22 @@ class PostController extends Controller
                         ->withInput();
         }
 
-		$post->text = $request->input('text');
-		$post->save();
+		PostEdit::create([
+			'text' => $request->input('text'),
+			'user_id' => Auth::id(),
+			'post_id' => $post->id
+		]);
 
-		return redirect(route('post.show', $post->id));
-
-		
+		return redirect(route('post.show', $post->id));		
     }
+
+	public function history($id) {
+
+		$post = Post::with('edits')->findOrFail($id);
+		$post->edits = $post->edits->sortByDesc('data');
+
+		return view('post-edits', compact('post'));
+	}
 
     /**
      * Remove the specified resource from storage.
