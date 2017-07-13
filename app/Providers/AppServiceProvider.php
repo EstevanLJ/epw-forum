@@ -24,6 +24,8 @@ class AppServiceProvider extends ServiceProvider
 			
 			return !$area->existsPostTitle($value);
         });
+
+		\Carbon\Carbon::setLocale(config('app.locale'));
     }
 
     /**

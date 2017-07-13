@@ -14,6 +14,11 @@
         <span></span>
         </span>
         <div class="nav-right nav-menu">
+
+            @if(Auth::user()->isAdmin())
+                <a class="nav-item is-tab" href="{{ route('admin-panel') }}">Painel de Administração</a>
+            @endif
+
             <a href="{{ route('post.create') }}" class="nav-item is-tab is-hidden-mobile">
                 <span class="tag is-primary is-medium">Novo Post</span>
             </a>

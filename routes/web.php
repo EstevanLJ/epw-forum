@@ -40,7 +40,11 @@ Route::get('/regras-forum', function () {
 	abort(404);
 })->name('regras');
 
-Route::get('/test/post/edit/{id}', function($id) {
-    $post = \App\Post::findOrFail($id);
-    return response()->json($post->getLastText());
-});
+Route::get('/admin-panel', function () {
+	abort(404);
+})->name('admin-panel');
+
+// Route::get('/test/post/edit/{id}', function($id) {
+//     $post = \App\Post::findOrFail($id);
+//     return response()->json($post->getLastText());
+// });

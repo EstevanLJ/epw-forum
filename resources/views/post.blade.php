@@ -6,7 +6,7 @@
 <div class="columns">
     <div class="column has-text-centered">
         <h1 class="title is-1">{{$post->title}}</h1>
-        <h5 class="subtitle is-5">em <a href="{{ $post->area->getUrl() }}">{{$post->area->name}}</a></h5>
+        <h5 class="subtitle is-5">em <a href="{{ $post->area->getUrl() }}">{{$post->area->name}}</a> {{getDataDiff($post->created_at)}}</h5>
     </div>
 </div>
 
@@ -14,11 +14,14 @@
 
 @if(Auth::user()->can('update', $post))
 
-    
-
     <div class="columns">
-        <div class="column is-three-quarters">
-            Post criado em {{formatDate($post->created_at)}}
+        <div class="column is-one-third">
+            <p>Você criou esse post em {{formatDate($post->created_at)}}</p>            
+        </div>
+        <div class="column is-one-third">
+            @if($post->wasEdited())
+                <p>O post foi editado em {{formatDate($post->updated_at)}}</p>
+            @endif      
         </div>
         <div class="column">
             <div class="block is-pulled-right">
@@ -27,8 +30,6 @@
             </div>
         </div>
     </div>
-
-
 
     <hr>
 
@@ -50,8 +51,6 @@
                     @if($post->wasEdited())
                         <a href="{{ route('post.history', $post->id)}}">editado</a>
                     @endif
-                    
-                    {{getDataDiff($post->created_at)}}
                     <br> 
                     {{$post->getLastText()}}
                 </p>
@@ -74,7 +73,13 @@
 </div>
 
 
-@if(sizeof($post->comments) > 0)
+@if($post->getCommentsCount() > 0)
+
+    <div class="columns">
+        <div class="column">
+            <h3 class="subtitle is-3">{{$post->getCommentsCount()}} Comentário{{$post->getCommentsCount() > 1 ? 's' : ''}}</h3>
+        </div>
+    </div>
 
     <hr>
 

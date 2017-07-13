@@ -6,9 +6,7 @@
 * @return string
 */
 function formatDate($date) {
-    $date = new DateTime($date);
-
-    return $date->format('d/m/Y \à\s H:i:s');
+    return Carbon\Carbon::parse($date)->format('d/m/Y \à\s H:i:s');
 }
 
 /**
@@ -16,9 +14,8 @@ function formatDate($date) {
 *
 * @return string
 */
-function getDataDiff($data) {
-	Carbon\Carbon::setLocale(config('app.locale'));
-    return Carbon\Carbon::parse($data)->diffForHumans();
+function getDataDiff($date) {
+    return Carbon\Carbon::parse($date)->diffForHumans();
 }
 
 /**

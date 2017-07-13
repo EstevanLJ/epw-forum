@@ -10,6 +10,7 @@ use JavaScript;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 use Validator;
 
 class PostController extends Controller
@@ -165,6 +166,9 @@ class PostController extends Controller
 			'user_id' => Auth::id(),
 			'post_id' => $post->id
 		]);
+
+		$post->updated_at = Carbon::now();
+		$post->save();
 
 		return redirect(route('post.show', $post->id));		
     }
