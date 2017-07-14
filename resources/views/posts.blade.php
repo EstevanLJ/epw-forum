@@ -22,17 +22,23 @@
                 <div class="level-left">
                     <div class="level-item">
                         <p class="subtitle is-5">
+
+                            @if($post->isArchived())                    
+                                
+                                <span class="tag is-warning">Arquivado</span>
+
+                            @endif
+
                             <strong><a href="{{$post->getUrl()}}">{{$post->title}}</a></strong> 
                             
-                            @unless(isset($area))
-                    
+                            @unless(isset($area))                    
                                 
                                 <small>{{$post->area->name}}</small>
 
                             @endif
                         
-                                <small>{{$post->getCommentsCount()}} comentário{{$post->getCommentsCount() > 1 ? 's' : ''}}</small>
-
+                            <small>{{$post->getCommentsCount()}} comentário{{$post->getCommentsCount() > 1 ? 's' : ''}}</small>
+                            
                         </p>
                     </div>
                 </div>

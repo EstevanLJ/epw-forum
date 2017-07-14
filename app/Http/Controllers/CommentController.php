@@ -57,16 +57,17 @@ class CommentController extends Controller
         ]);
         
         if ($validator->fails()) {
-            return response()->json([
-            'errors' => $validator->errors(),
-            'inputs' => $request->all()
-            ], 400);
+			return back()->withErrors();
         }
-        
-		//Verifica se o post existe
+
+		//Verifies if the post exists
         $post = Post::findOrFail($request->input('post_id'));
 
-		// $comment_decoded = base64_decode($request->comment);
+		//Verifies if the post is archived
+		if($post->isArchived()) {
+			return back()->withErrors(array('message' => 'A postagem já foi arquivada!'));
+		}
+
 		$comment_decoded = $request->comment;
 
 		$comment = Comment::create([
@@ -74,10 +75,7 @@ class CommentController extends Controller
 			'user_id' => Auth::id(),
 			'comment' => $comment_decoded
 		]);        
-
-		Log:info('Comentario no post ' . $request->post_id);
-        
-        //return response()->json(['message' => 'success'], 201);       
+             
 		return redirect(route('post.show', $request->post_id));
         
     }

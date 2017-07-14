@@ -18,7 +18,7 @@ class PostEditTableSeeder extends Seeder
 		
 		for($i = 0; $i < SEEDERS_POST_EDITS; $i++) {
 
-			$post = Post::find(rand(0, SEEDERS_POSTS));
+			$post = Post::find(rand(1, SEEDERS_POSTS));
 
             $postEdit = PostEdit::create([ 
                 'text' => $faker->paragraph(5), 

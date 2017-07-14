@@ -18,10 +18,11 @@ class CreatePostTable extends Migration
             $table->string('title');
             $table->text('text');
 
-			$table->boolean('archived')->default('false');
+			$table->boolean('archived')->default(0);
 			$table->text('archived_comment')->nullable();
 			$table->integer('archived_by')->unsigned()->nullable();
             $table->foreign('archived_by')->references('id')->on('user');
+            $table->timestamp('archived_date')->nullable();
 
             $table->integer('area_id')->unsigned();
             $table->foreign('area_id')->references('id')->on('area');

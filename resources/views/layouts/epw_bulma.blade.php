@@ -13,6 +13,9 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.6/sweetalert2.min.css" />
+
+    @stack('styles')
 
 </head>
 
@@ -38,6 +41,7 @@
     {{-- <script>
         axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
     </script> --}}
+
 
     @stack('scripts')
     

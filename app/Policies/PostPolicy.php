@@ -59,8 +59,8 @@ class PostPolicy
      * @param  \App\Post  $post
      * @return mixed
      */
-    public function delete(User $user, Post $post)
+    public function archive(User $user, Post $post)
     {
-        return false;
+        return $user->id == $post->user_id;
     }
 }

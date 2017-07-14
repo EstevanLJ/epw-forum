@@ -27,6 +27,7 @@ Route::resource('area', 'AreaController', ['only' => [
 
 
 Route::get('/post/{id}/history', 'PostController@history')->name('post.history');
+Route::delete('/post/{id}/archive', 'PostController@archive')->name('post.archive');
 
 Route::resource('post', 'PostController', ['only' => [
 	'index', 'create', 'store', 'show', 'edit', 'update'
@@ -44,7 +45,4 @@ Route::get('/admin-panel', function () {
 	abort(404);
 })->name('admin-panel');
 
-// Route::get('/test/post/edit/{id}', function($id) {
-//     $post = \App\Post::findOrFail($id);
-//     return response()->json($post->getLastText());
-// });
+// Route::get('/test/post/{id}/archive', 'PostController@archive');

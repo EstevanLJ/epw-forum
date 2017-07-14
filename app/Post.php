@@ -28,9 +28,17 @@ class Post extends Model
     public function author() {
         return $this->hasOne('App\User', 'id', 'user_id');
     }
+
+	public function archivedBy() {
+        return $this->hasOne('App\User', 'id', 'archived_by');
+    }
     
     public function wasEdited() {
         return DB::table('post_edit')->where('post_id', $this->id)->count() > 0;
+    }
+
+	public function isArchived() {
+        return boolval($this->archived);
     }
     
     public function getLastText() {
