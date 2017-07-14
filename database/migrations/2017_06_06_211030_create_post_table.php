@@ -18,6 +18,8 @@ class CreatePostTable extends Migration
             $table->string('title');
             $table->text('text');
 
+			$table->integer('visualizations')->unsigned()->default(0);;
+
 			$table->boolean('archived')->default(0);
 			$table->text('archived_comment')->nullable();
 			$table->integer('archived_by')->unsigned()->nullable();

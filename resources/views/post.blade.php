@@ -150,6 +150,13 @@
         <div class="column">
             <h3 class="subtitle is-3">{{$post->getCommentsCount()}} Comentário{{$post->getCommentsCount() > 1 ? 's' : ''}}</h3>
         </div>
+        @if($post->visualizations > 1)
+            <div class="column">
+                <a class="button is-primary is-static is-outlined is-pulled-right">
+                    {{$post->visualizations}} visualizações
+                </a>
+            </div>
+        @endif
     </div>
 
     <hr>

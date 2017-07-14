@@ -108,6 +108,10 @@ class PostController extends Controller
         // JavaScript::put([
         //     'post_id' => $post->id
         // ]);
+
+		if(Auth::id() != $post->user_id && !Auth::user()->isAdmin()) {
+			$post->addVisualization();
+		}
         
         return view('post', compact('post'));
     }
