@@ -33,6 +33,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Post', 'user_id', 'id');
     }
 
+	public function lastPosts($number = 5) {
+		return Post::where('user_id', '=', $this->id)->orderByDesc('date')->limit($number)->get();
+	}
+
     public function comments() {
         return $this->hasMany('App\Comment', 'user_id', 'id');
     }
@@ -45,9 +49,9 @@ class User extends Authenticatable
         return ucfirst(strtolower($this->first_name)).' '.ucfirst(strtolower($this->last_name));
     }
 
-    public function getAvatarUrl() {
+    public function getAvatarUrl($px = 200) {
         if(AVATAR_PROVIDER == 'adorable') {
-            return get_adorable($this->email);
+            return get_adorable($this->email, $px);
         } 
         
         return get_gravatar($this->email);
@@ -62,6 +66,6 @@ class User extends Authenticatable
     }
 
     public function getUrl() {
-        return route('user', $this->id);
+        return route('user', $this->user_name);
     }
 }

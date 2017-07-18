@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -55,8 +56,12 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($user)
     {
+		Log::info($user);
+
+		$user = User::where('user_name', '=', $user)->firstOrFail();
+
         $user->load('posts', 'comments');
 
         return view('user', compact('user'));

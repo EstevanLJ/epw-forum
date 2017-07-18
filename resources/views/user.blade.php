@@ -1,79 +1,83 @@
-@extends('layouts.epw') 
+@extends('layouts.epw_bulma') 
 
 @section('content')
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="text-center">
-                <h1>{{$user->getFullName()}}</h1>
-                <hr>
+    <div class="columns">
+        <div class="column is-one-quarter">
+
+            <figure class="image" style="height: 256px; width: 256px;">
+                <img src="{{$user->getAvatarUrl()}}" alt="Image">
+            </figure>
+
+            <br>
+
+            <h4 class="title is-4">{{$user->getFullName()}}</h4>
+            <h5 class="subtitle is-5"><a href="#">{{'@' . $user->user_name}}</a></h5>
+
+            <hr>
+            
+            <h5 class="title is-5">
+                {{$user->posts->count() > 0 ? ($user->posts->count() > 1 ? $user->posts->count() . ' posts' : $user->posts->count() . ' pots') : 'Nenhum Post'}}
+            </h5>
+
+            <h5 class="title is-5">
+                {{$user->comments->count() > 0 ? ($user->comments->count() > 1 ? $user->comments->count() . ' comentários' : $user->posts->count() . ' comentário') : 'Nenhum Comentário'}}
+            </h5>
+            
+
+        </div>
+
+        <div class="column">
+            <div class="tabs">
+                <ul>
+                    <li class="is-active"><a>Últimos Posts</a></li>
+                    {{--  <li><a>Comentários</a></li>  --}}
+                </ul>
             </div>
-        </div>
-    </div>   
 
-    <div class="row">
-        <div class="col-sm-3">
-            <img src="{{$user->getAvatarUrl()}}" alt="profile" class="img-responsive">
-        </div>
+            <div class="columns">
+                <div class="column">
 
-        <div class="col-sm-9">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h3>Username: {{$user->user_name}}</h3>
+                    @if($user->posts->count() > 0)
+
+                        @foreach($user->lastPosts() as $post)
+                            <div class="box">
+                                <nav class="level">
+                                    <div class="level-left">
+                                        <div class="level-item">
+                                            <p class="subtitle is-5">
+                                                <strong><a href="{{$post->getUrl()}}">{{$post->title}}</a></strong> 
+                                                <small>{{$post->area->name}}</small>
+                                                <small>{{$post->getCommentsCount()}} comentário{{$post->getCommentsCount() > 1 ? 's' : ''}}</small>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="level-right">
+                                        <p class="level-item">
+                                            {{getDataDiff($post->created_at)}}
+                                        </p>
+                                    </div>
+                                </nav>
+                            </div>
+                        @endforeach
+
+                    @else
+
+                        <h4 class="title is-4 has-text-centered">Nenhum post até o momento!</h4>
+
+                    @endif
+
+
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <h3>Última atividade: um mês atrás</h3>
-                </div>
-            </div>
 
-        </div>
+
+
+        </div>    
     </div>
+
 
     <hr>
 
-    <div class="row">
-        <div class="col-sm-12">
-
-            @if(sizeof($user->posts) > 0)
-                <h3>Últimas postagens:</h3>
-                <div class="list-group">
-                    @foreach($user->posts as $post)
-                        <a href="{{$post->getUrl()}}" class="list-group-item">{{$post->title}}</a>
-                    @endforeach
-                </div>
-            @else
-
-                <h3>Nenhuma postagem!</h3>
-
-            @endif
-
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-12">
-
-            @if(sizeof($user->comments) > 0)
-                <h3>Últimos comentários:</h3>
-                <div class="list-group">
-                    @foreach($user->comments as $comment)
-                        <a href="#" class="list-group-item">{{limitStringTo($comment->comment, 70)}}</a>
-                    @endforeach
-                </div>
-            @else
-
-                <h3>Nenhum comentário!</h3>
-
-            @endif
-
-        </div>
-    </div>
-
-
-
-</div>
 
 @endsection
