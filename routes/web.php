@@ -25,6 +25,7 @@ Route::resource('area', 'AreaController', ['only' => [
 	'index', 'show'
 ]]);
 
+Route::post('/search', 'SearchController@searchPost');
 
 Route::get('/post/{id}/history', 'PostController@history')->name('post.history');
 Route::delete('/post/{id}/archive', 'PostController@archive')->name('post.archive');
@@ -45,4 +46,5 @@ Route::get('/admin-panel', function () {
 	abort(404);
 })->name('admin-panel');
 
-// Route::get('/test/post/{id}/archive', 'PostController@archive');
+
+// Route::get('/test/search/{search}', 'SearchController@searchPost');

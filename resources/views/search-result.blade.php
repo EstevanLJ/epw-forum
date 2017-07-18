@@ -2,15 +2,7 @@
 
 @section('content')
 
-    @if(isset($area))
-        
-        <h1 class="title is-1 has-text-centered">{{$area->name}} - Últimas Postagens</h1>
-
-    @else
-
-        <h1 class="title is-1 has-text-centered">Últimas Postagens</h1>
-
-    @endif
+    <h1 class="title is-1 has-text-centered">Resultados da busca</h1>
 
     <hr>
     
@@ -18,14 +10,9 @@
         <div class="column is-half is-offset-one-quarter">
             <form action="/search" method="POST">
                 {{csrf_field()}}
-
-                @if(isset($area))        
-                    <input type="hidden" name="area" value="{{$area->id}}">
-                @endif
-
                 <div class="field has-addons">
                     <div class="control is-expanded">
-                        <input class="input" type="text" name="search" placeholder="Título ou conteúdo">
+                        <input class="input" type="text" name="search" placeholder="Título ou conteúdo" value="{{$search}}">
                     </div>
                     <div class="control">
                         <button type="submit" class="button is-primary">
@@ -33,7 +20,12 @@
                         </button>
                     </div>
                 </div>
+
             </form>
+        </div>
+        
+        <div class="column">
+            <a href="{{ route('post.index') }}" class="button">Voltar</a>
         </div>
 
     </div>

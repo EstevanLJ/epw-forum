@@ -8,11 +8,8 @@
             <a href="{{ route('post.index') }}" class="nav-item is-tab is-hidden-mobile {{ Route::currentRouteName() == 'post.index' ? 'is-active' : '' }}">Posts</a>
             {{--  <a href="{{ route('users') }}" class="nav-item is-tab is-hidden-mobile {{ Route::currentRouteName() == 'users' ? 'is-active' : '' }}">Usuários</a>  --}}
         </div>
-        <span class="nav-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
-        </span>
+     
+
         <div class="nav-right nav-menu">
 
             @if(Auth::user()->isAdmin())
