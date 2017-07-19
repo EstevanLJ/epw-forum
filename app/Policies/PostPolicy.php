@@ -37,7 +37,7 @@ class PostPolicy
      */
     public function create(User $user)
     {
-        return true;
+        return $user->active;
     }
 
     /**
@@ -49,7 +49,7 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
-        return $user->id == $post->user_id && !$post->isArchived();
+        return $user->id == $post->user_id && !$post->isArchived() && $user->active;
     }
 
     /**
@@ -61,6 +61,6 @@ class PostPolicy
      */
     public function archive(User $user, Post $post)
     {
-        return $user->id == $post->user_id;
+        return $user->id == $post->user_id && $user->active;
     }
 }

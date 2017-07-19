@@ -37,7 +37,7 @@ class CommentPolicy
      */
     public function create(User $user)
     {
-        return true;
+        return $user->isActive();
     }
 
     /**
@@ -49,7 +49,7 @@ class CommentPolicy
      */
     public function update(User $user, Comment $comment)
     {
-        return $user->id == $coment->user_id;
+        return $user->id == $coment->user_id && $user->active;
     }
 
     /**
@@ -61,6 +61,6 @@ class CommentPolicy
      */
     public function delete(User $user, Comment $comment)
     {
-        return $user->id == $coment->user_id;
+        return $user->id == $coment->user_id && $user->active;
     }
 }

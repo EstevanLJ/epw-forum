@@ -38,13 +38,14 @@ Route::resource('comment', 'CommentController', ['only' => [
 	'store'
 ]]);
 
+Route::resource('user', 'UserController', ['only' => [
+	'index', 'edit', 'update'
+]]);
+
 Route::get('/regras-forum', function () {
 	abort(404);
 })->name('regras');
 
 Route::get('/admin-panel', function () {
-	abort(404);
+	return view('admin.index');
 })->name('admin-panel');
-
-
-// Route::get('/test/search/{search}', 'SearchController@searchPost');

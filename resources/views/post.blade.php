@@ -31,7 +31,7 @@
 
 <hr>
 
-@if(Auth::user()->can('update', $post))
+@can('update', $post)
 
     <div class="columns">
         <div class="column is-one-third">
@@ -188,7 +188,7 @@
 <hr>
 <br>
 
-@unless($post->isArchived())
+@if(Auth::user()->can('create', \App\Comment::class) && !$post->isArchived())
 
     <div class="columns">
         <div class="column has-text-centered">

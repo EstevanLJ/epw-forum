@@ -2,7 +2,7 @@
     <div class="container">
         <div class="nav-left">
             <a class="nav-item">
-                <strong>Electrical Power Forum</strong>
+                <strong style="color: #fff">Electrical Power Forum</strong>
             </a>
             <a href="{{ route('area.index') }}" class="nav-item is-tab is-hidden-mobile {{ Route::currentRouteName() == 'area.index' ? 'is-active' : '' }}">Áreas</a>
             <a href="{{ route('post.index') }}" class="nav-item is-tab is-hidden-mobile {{ Route::currentRouteName() == 'post.index' ? 'is-active' : '' }}">Posts</a>

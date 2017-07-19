@@ -69,7 +69,7 @@
             <button class="button is-primary" type="submit">Atualizar</button>
         </p>
          <p class="control">
-            <a class="button is-link" href="{{ route('post.show', $post->id) }}">Cancelar</a>
+            <a class="button" href="{{ route('post.show', $post->id) }}">Cancelar</a>
         </p> 
     </div>
 </form>

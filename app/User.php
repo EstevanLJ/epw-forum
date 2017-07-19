@@ -45,6 +45,10 @@ class User extends Authenticatable
 		return $this->id == 1;
 	}
 
+	public function isActive() {
+		return $this->active == 1;
+	}
+
     public function getFullName() {
         return ucfirst(strtolower($this->first_name)).' '.ucfirst(strtolower($this->last_name));
     }
