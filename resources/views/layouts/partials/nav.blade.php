@@ -16,9 +16,12 @@
                 <a class="nav-item is-tab" href="{{ route('admin-panel') }}">Painel de Administração</a>
             @endif
 
-            <a href="{{ route('post.create') }}" class="nav-item is-tab is-hidden-mobile">
-                <span class="tag is-primary is-medium">Novo Post</span>
-            </a>
+            @can('create', \App\Post::class)
+                <a href="{{ route('post.create') }}" class="nav-item is-tab is-hidden-mobile">
+                    <span class="tag is-primary is-medium">Novo Post</span>
+                </a>
+            @endcan
+            
             <a class="nav-item is-tab">{{Auth::user()->getFullName()}}</a>
             <a class="nav-item is-tab" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sair</a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

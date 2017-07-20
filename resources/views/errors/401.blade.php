@@ -25,7 +25,7 @@
                 <div class="column has-text-centered">
                     <h1 class="title is-1 is-spaced">401</h1>
                     <h5 class="subtitle is-5">Whops! Você não está autorizado.</h5>
-                    <a href="{{ route('area.index') }}" class="button is-primary is-outlined">Voltar</a>
+                    <a href="{{ route('post.index') }}" class="button is-primary is-outlined">Voltar</a>
                 </div>
             </div>
 

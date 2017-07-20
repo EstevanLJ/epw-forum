@@ -20,7 +20,8 @@
                         <th>E-mail</th>
                         <th>Ativo?</th>
                         {{--  <th><abbr title="Points">Pts</abbr></th>  --}}
-                        <th>Data de registro</th>
+                        <th>Data de Registro</th>
+                        <th>Última Atualização</th>
                         <th class="has-text-centered">Ação</th>
                     </tr>
                 </thead>
@@ -35,6 +36,7 @@
                             <td>{{$user->email}}</td>
                             <td>{{$user->active ? 'Sim' : 'Não'}}</td>
                             <td>{{$user->created_at}}</td>
+                            <td>{{$user->updated_at}}</td>
                             <td>
                                 <a class="button is-primary is-outlined is-small" href="{{ route('user.edit', $user->id) }}">
                                     <span class="icon is-small">

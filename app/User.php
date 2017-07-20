@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Http\Request;
 
 class User extends Authenticatable
 {
@@ -50,7 +51,17 @@ class User extends Authenticatable
 	}
 
     public function getFullName() {
-        return ucfirst(strtolower($this->first_name)).' '.ucfirst(strtolower($this->last_name));
+		$firsts = explode(' ', $this->first_name);
+		$lasts = explode(' ', $this->last_name);
+
+		$all = array_merge($firsts, $lasts);
+		$allok = array();
+
+		foreach($all as $a) {
+			$allok[] = ucfirst(strtolower($a));
+		}
+
+        return implode(' ', $allok);
     }
 
     public function getAvatarUrl($px = 200) {
@@ -72,4 +83,11 @@ class User extends Authenticatable
     public function getUrl() {
         return route('user', $this->user_name);
     }
+
+	public function isEqual(Request $request) {
+		return $this->first_name == $request->input('first_name') &&
+				$this->last_name == $request->input('last_name') &&
+				$this->email == $request->input('email') &&
+				$this->active == $request->input('active');
+	}
 }

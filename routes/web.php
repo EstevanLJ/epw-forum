@@ -46,6 +46,4 @@ Route::get('/regras-forum', function () {
 	abort(404);
 })->name('regras');
 
-Route::get('/admin-panel', function () {
-	return view('admin.index');
-})->name('admin-panel');
+Route::get('/admin-panel', 'AdminPanelController@index')->name('admin-panel');

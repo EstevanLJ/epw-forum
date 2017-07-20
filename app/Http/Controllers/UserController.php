@@ -6,6 +6,8 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Validator;
+
 
 class UserController extends Controller
 {
@@ -108,21 +110,32 @@ class UserController extends Controller
         	'last_name.required' => 'O sobrenome é obrigatório',
         	'last_name.max' => 'O sobrenome não pode ser maior do que 240 caracteres',
         	'email.required' => 'O e-mail é obrigatório',
-        	'email.unique' => 'Este e-mail já está sendo utilizado por outro usuário',
+        	'email.unique_email_update' => 'Este e-mail já está sendo utilizado por outro usuário',
+        	'active.required' => 'Indique se o usuário está ativo',
         ];
         
         $validator = Validator::make($request->all(), [
 			'first_name' => 'required|max:240',
 			'last_name' => 'required|max:240',
-			'email' => 'required|unique:user',
+			'email' => 'required|unique_email_update:'.$user->id,
+			'active' => 'required',
         ], $messages);
         
         if ($validator->fails()) {
             return redirect(route('user.edit', $user->id))
-            ->withErrors($validator)
-            ->withInput();
+					->withErrors($validator)
+					->withInput();
         }
 
+		if($user->isEqual($request)){
+			return redirect(route('user.index'));	
+		}
+
+		$user->first_name = $request->input('first_name');
+		$user->last_name = $request->input('last_name');
+		$user->email = $request->input('email');
+		$user->active = $request->input('active');
+		$user->save();
 
 		return redirect(route('user.index'));
     }

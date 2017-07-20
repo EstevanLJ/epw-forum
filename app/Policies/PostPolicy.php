@@ -37,7 +37,7 @@ class PostPolicy
      */
     public function create(User $user)
     {
-        return $user->active;
+        return $user->isActive();
     }
 
     /**

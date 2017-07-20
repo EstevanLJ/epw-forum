@@ -27,7 +27,7 @@
                     <label class="label">Nome</label>
                     <div class="control">
                         <input class="input {{ $errors->has('first_name') ? 'is-danger' : '' }}" 
-                                type="text" value="{{$user->first_name}}" placeholder="Primeiro Nome">
+                                type="text" name="first_name" value="{{$user->first_name}}" placeholder="Primeiro Nome">
                     </div>
                     @if ($errors->has('first_name'))
                         <p class="help is-danger">{{ $errors->first('first_name') }}</p>
@@ -38,7 +38,7 @@
                     <label class="label">Sobrenome</label>
                     <div class="control">
                         <input class="input {{ $errors->has('last_name') ? 'is-danger' : '' }}" 
-                                type="text" value="{{$user->last_name}}" placeholder="Sobrenome">
+                                type="text" name="last_name" value="{{$user->last_name}}" placeholder="Sobrenome">
                     </div>
                     @if ($errors->has('first_name'))
                         <p class="help is-danger">{{ $errors->first('last_name') }}</p>
@@ -50,7 +50,7 @@
                     <label class="label">E-mail</label>
                     <div class="control">
                         <input class="input {{ $errors->has('email') ? 'is-danger' : '' }}"
-                                type="text" value="{{$user->email}}" placeholder="E-mail">
+                                type="text" name="email" value="{{$user->email}}" placeholder="E-mail">
                     </div>
                     @if ($errors->has('email'))
                         <p class="help is-danger">{{ $errors->first('email') }}</p>
@@ -60,8 +60,8 @@
                 <div class="field">  
                     <label class="label">Ativo</label>      
                     <p class="control">
-                        <span class="select is-fullwidth">
-                            <select name="ativo">
+                        <span class="select is-fullwidth {{ $errors->has('active') ? 'is-danger' : '' }}">
+                            <select name="active">
 
                                 @if($user->isActive())
 
@@ -78,6 +78,9 @@
                             </select>
                         </span>
                     </p>
+                    @if ($errors->has('active'))
+                        <p class="help is-danger">{{ $errors->first('active') }}</p>
+                    @endif
                 </div>
                 
                 <div class="field is-grouped">
