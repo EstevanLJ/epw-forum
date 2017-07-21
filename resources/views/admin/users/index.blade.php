@@ -6,6 +6,30 @@
 
     {{--  <hr>  --}}
 
+    @if (session('status'))
+        <article id="info_message" class="message is-success">
+            <div class="message-header">
+                <p>Informação</p>
+                <button id="info_message_close" class="delete"></button>
+            </div>
+            <div class="message-body">
+                {{session('status')}}
+            </div>
+        </article>
+
+        <script>
+            function closeMessage() {
+                document.getElementById('info_message').style.display = 'none';
+            }
+
+            document.getElementById('info_message_close').addEventListener('click', function() {
+                closeMessage();
+            });        
+
+            setTimeout(closeMessage, 2500);
+        </script>
+    @endif
+
     <div class="columns">
     
         <div class="column">
@@ -55,9 +79,75 @@
             </table>
 
         </div>
+
     
     </div>
 
+      <div class="columns  has-text-centered">
+    
+        <div class="column">
+
+            <div class="field has-addons">
+
+                @if($users->currentPage() != 1)
+                    <p class="control">
+                        <a class="button" href="{{$users->previousPageUrl()}}">
+                            <span class="icon is-small">
+                                <i class="fa fa-angle-double-left"></i>
+                            </span>
+                        </a>
+                    </p>
+                @else
+                    <p class="control">
+                        <a class="button" disabled>
+                            <span class="icon is-small">
+                                <i class="fa fa-angle-double-left"></i>
+                            </span>
+                        </a>
+                    </p>
+                @endif
+
+                @for($i = 1; $i <= ceil($users->total() / $users->perPage()) ; $i++)
+
+                    @if($i == $users->currentPage())
+                        <p class="control">
+                            <a class="button is-primary" href="{{$users->url($i)}}">{{$i}}</a>
+                        </p>
+                    @else
+                        <p class="control">
+                            <a class="button" href="{{$users->url($i)}}">{{$i}}</a>
+                        </p>
+                    @endif                    
+
+                @endfor
+
+                @if($users->hasMorePages())
+                    <p class="control">
+                        <a class="button" href="{{$users->nextPageUrl()}}">
+                            <span class="icon is-small">
+                                <i class="fa fa-angle-double-right"></i>
+                            </span>
+                        </a>
+                    </p>
+                @else
+                    <p class="control">
+                        <a class="button" disabled>
+                            <span class="icon is-small">
+                                <i class="fa fa-angle-double-right"></i>
+                            </span>
+                        </a>
+                    </p>
+                @endif
+
+                
+                
+            </div>
+        </div>
+
+    </div>
+
+    
+    {{--  {{ $users->links() }}  --}}
 
     
 

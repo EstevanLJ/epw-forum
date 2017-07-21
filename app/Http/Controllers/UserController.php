@@ -33,7 +33,7 @@ class UserController extends Controller
 			abort(401);
 		}
 
-		$users = User::all();
+		$users = User::paginate(10);
 		return view('admin.users.index', compact('users'));		
     }
 
@@ -137,7 +137,7 @@ class UserController extends Controller
 		$user->active = $request->input('active');
 		$user->save();
 
-		return redirect(route('user.index'));
+		return redirect(route('user.index'))->with('status', 'Usuário atualizado com sucesso!');;
     }
 
     /**
