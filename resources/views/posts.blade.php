@@ -28,7 +28,7 @@
                         <input class="input" type="text" name="search" placeholder="Título ou conteúdo">
                     </div>
                     <div class="control">
-                        <button type="submit" class="button is-primary">
+                        <button type="submit" class="button is-link">
                             Buscar
                         </button>
                     </div>

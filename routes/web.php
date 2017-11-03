@@ -15,7 +15,7 @@ Auth::routes();
 
 Route::get('/', function () {
     return redirect('/post');
-});
+})->name('home');
 
 Route::get('/users', 'UserController@index')->name('users');
 Route::get('/user/{user}', 'UserController@show')->name('user');

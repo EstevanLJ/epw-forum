@@ -77,7 +77,7 @@
     </div>
     <div class="field is-grouped">
         <p class="control">
-            <button class="button is-primary">Enviar</button>
+            <button class="button is-link">Enviar</button>
         </p>
         {{--  <p class="control">
             <button class="button is-link">Cancelar</button>

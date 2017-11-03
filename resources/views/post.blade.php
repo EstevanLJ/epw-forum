@@ -46,10 +46,10 @@
             <div class="block is-pulled-right">
 
                 @if($post->isArchived())
-                    <a class="button is-primary" disabled>Editar Post</a>
+                    <a class="button is-link" disabled>Editar Post</a>
                     <a class="button is-warning" disabled>Arquivar Post</a>
                 @else
-                    <a class="button is-primary" href="{{ route('post.edit', $post->id) }}">Editar Post</a>
+                    <a class="button is-link" href="{{ route('post.edit', $post->id) }}">Editar Post</a>
                     <a id="archive_post_button" class="button is-warning">Arquivar Post</a>
                 @endif
 
@@ -152,7 +152,7 @@
         </div>
         @if($post->visualizations > 1)
             <div class="column">
-                <a class="button is-primary is-static is-outlined is-pulled-right">
+                <a class="button is-link is-static is-outlined is-pulled-right">
                     {{$post->visualizations}} visualizações
                 </a>
             </div>
@@ -215,7 +215,7 @@
         </div>
         <div class="field is-grouped">
             <p class="control">
-                <button class="button is-primary">Enviar</button>
+                <button class="button is-link">Enviar</button>
             </p>
             {{--  <p class="control">
                 <button class="button is-link">Cancelar</button>

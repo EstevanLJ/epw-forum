@@ -34,7 +34,7 @@
     
         <div class="column">
             
-            <table class="table">
+            <table class="table is-hoverable is-fullwidth">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -62,7 +62,7 @@
                             <td>{{$user->created_at}}</td>
                             <td>{{$user->updated_at}}</td>
                             <td>
-                                <a class="button is-primary is-outlined is-small" href="{{ route('user.edit', $user->id) }}">
+                                <a class="button is-link is-outlined is-small" href="{{ route('user.edit', $user->id) }}">
                                     <span class="icon is-small">
                                         <i class="fa fa-pencil"></i>
                                     </span>
@@ -82,73 +82,68 @@
 
     
     </div>
-
-      <div class="columns  has-text-centered">
     
-        <div class="column">
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
 
-            <div class="field has-addons">
+        <ul class="pagination-list">
 
-                @if($users->currentPage() != 1)
-                    <p class="control">
-                        <a class="button" href="{{$users->previousPageUrl()}}">
-                            <span class="icon is-small">
-                                <i class="fa fa-angle-double-left"></i>
-                            </span>
+            @if($users->currentPage() != 1)
+                <li>
+                    <a class="pagination-link" href="{{$users->previousPageUrl()}}"> 
+                        <span class="icon is-small">
+                            <i class="fa fa-angle-double-left"></i>
+                        </span>
+                    </a>
+                </li>
+            @else
+                <li>
+                    <a class="pagination-link" disabled> 
+                        <span class="icon is-small">
+                            <i class="fa fa-angle-double-left"></i>
+                        </span>
+                    </a>
+                </li>
+            @endif
+
+            @for($i = 1; $i <= ceil($users->total() / $users->perPage()) ; $i++)
+
+                @if($i == $users->currentPage())
+                    <li>
+                        <a class="pagination-link is-current" href="{{$users->url($i)}}"> 
+                            {{$i}}
                         </a>
-                    </p>
+                    </li>
                 @else
-                    <p class="control">
-                        <a class="button" disabled>
-                            <span class="icon is-small">
-                                <i class="fa fa-angle-double-left"></i>
-                            </span>
+                    <li>
+                        <a class="pagination-link" href="{{$users->url($i)}}"> 
+                            {{$i}}
                         </a>
-                    </p>
-                @endif
+                    </li>
+                @endif                    
 
-                @for($i = 1; $i <= ceil($users->total() / $users->perPage()) ; $i++)
+            @endfor
 
-                    @if($i == $users->currentPage())
-                        <p class="control">
-                            <a class="button is-primary" href="{{$users->url($i)}}">{{$i}}</a>
-                        </p>
-                    @else
-                        <p class="control">
-                            <a class="button" href="{{$users->url($i)}}">{{$i}}</a>
-                        </p>
-                    @endif                    
-
-                @endfor
-
-                @if($users->hasMorePages())
-                    <p class="control">
-                        <a class="button" href="{{$users->nextPageUrl()}}">
-                            <span class="icon is-small">
-                                <i class="fa fa-angle-double-right"></i>
-                            </span>
-                        </a>
-                    </p>
-                @else
-                    <p class="control">
-                        <a class="button" disabled>
-                            <span class="icon is-small">
-                                <i class="fa fa-angle-double-right"></i>
-                            </span>
-                        </a>
-                    </p>
-                @endif
-
+            @if($users->hasMorePages())
+                <li>
+                    <a class="pagination-link" href="{{$users->nextPageUrl()}}"> 
+                        <span class="icon is-small">
+                            <i class="fa fa-angle-double-right"></i>
+                        </span>
+                    </a>
+                </li>
+            @else
+                <li>
+                    <a class="pagination-link" disabled> 
+                        <span class="icon is-small">
+                            <i class="fa fa-angle-double-right"></i>
+                        </span>
+                    </a>
+                </li>
+            @endif
                 
-                
-            </div>
-        </div>
+        </ul>
 
-    </div>
-
-    
-    {{--  {{ $users->links() }}  --}}
-
+    </nav>
     
 
 @endsection

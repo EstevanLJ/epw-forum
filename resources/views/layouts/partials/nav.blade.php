@@ -1,32 +1,42 @@
-<nav class="nav has-shadow">
-    <div class="container">
-        <div class="nav-left">
-            <a class="nav-item">
-                <strong style="color: #fff">Electrical Power Forum</strong>
+<nav class="navbar is-dark">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="{{ route('home') }}">
+            <strong>Electrical Power Forum</strong>
+        </a>
+
+    </div>
+
+    <div id="navMenuTransparentExample" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item " href="{{ route('area.index') }}">
+                Áreas
             </a>
-            <a href="{{ route('area.index') }}" class="nav-item is-tab is-hidden-mobile {{ Route::currentRouteName() == 'area.index' ? 'is-active' : '' }}">Áreas</a>
-            <a href="{{ route('post.index') }}" class="nav-item is-tab is-hidden-mobile {{ Route::currentRouteName() == 'post.index' ? 'is-active' : '' }}">Posts</a>
-            {{--  <a href="{{ route('users') }}" class="nav-item is-tab is-hidden-mobile {{ Route::currentRouteName() == 'users' ? 'is-active' : '' }}">Usuários</a>  --}}
+            <a class="navbar-item " href="{{ route('post.index') }}">
+                Posts
+            </a>
         </div>
-     
 
-        <div class="nav-right nav-menu">
-
+        <div class="navbar-end">
+        
             @if(Auth::user()->isAdmin())
-                <a class="nav-item is-tab" href="{{ route('admin-panel') }}">Painel de Administração</a>
-            @endif
-
+                <a class="navbar-item" href="{{ route('admin-panel') }}">
+                    Painel de Administração
+                </a>
+            @endif 
+            
             @can('create', \App\Post::class)
-                <a href="{{ route('post.create') }}" class="nav-item is-tab is-hidden-mobile">
-                    <span class="tag is-primary is-medium">Novo Post</span>
+                <a href="{{ route('post.create') }}" class="navbar-item is-tab is-hidden-mobile">
+                    <span class="tag is-link is-medium">Novo Post</span>
                 </a>
             @endcan
-            
-            <a class="nav-item is-tab">{{Auth::user()->getFullName()}}</a>
-            <a class="nav-item is-tab" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sair</a>
+
+            <a class="navbar-item is-tab" href="{{Auth::user()->getUrl()}}">{{Auth::user()->getFullName()}}</a>
+
+            <a class="navbar-item is-tab" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sair</a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 {{ csrf_field() }}
             </form>
+
         </div>
     </div>
 </nav>

@@ -66,7 +66,7 @@
     </div>
     <div class="field is-grouped">
         <p class="control">
-            <button class="button is-primary" type="submit">Atualizar</button>
+            <button class="button is-link" type="submit">Atualizar</button>
         </p>
          <p class="control">
             <a class="button" href="{{ route('post.show', $post->id) }}">Cancelar</a>

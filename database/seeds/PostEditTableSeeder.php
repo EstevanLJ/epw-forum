@@ -14,7 +14,7 @@ class PostEditTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker\Factory::create();  
+        $faker = Faker\Factory::create('pt_br');
 		
 		for($i = 0; $i < SEEDERS_POST_EDITS; $i++) {
 
